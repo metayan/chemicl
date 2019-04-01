@@ -91,10 +91,10 @@ mass-number."
            (xpath:map-node-set->list 
             (lambda (node)
               (stp:with-attributes ((atomic-number "atomicnumber")
-                                    id
-                                    name
-                                    group
-                                    period)
+                                    (id "id")
+                                    (name "name")
+                                    (group "group")
+                                    (period "period"))
                   node
                 (let ((max-bond-order (xpath-number "maxbondorder" node))
                       (mass (xpath-number "mass" node))
@@ -123,13 +123,13 @@ mass-number."
     (with-cml-namespace
       (xpath:map-node-set
        (lambda (isotope-list-node)
-         (stp:with-attributes (id)
+         (stp:with-attributes ((id "id"))
              isotope-list-node
            (setf (isotopes (get-element id))
                  (sort 
                   (xpath:map-node-set->list
                    (lambda (isotope-node)
-                     (stp:with-attributes (number)
+                     (stp:with-attributes ((number "number"))
                          isotope-node
                        (make-instance
                         'isotope
